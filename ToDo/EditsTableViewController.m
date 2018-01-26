@@ -1,67 +1,62 @@
 //
-//  EditViewController.m
+//  EditsTableViewController.m
 //  ToDo
 //
 //  Created by Eric Groseclos on 2018-01-26.
 //  Copyright © 2018 Eric Groseclos. All rights reserved.
 //
 
-#import "EditViewController.h"
+#import "EditsTableViewController.h"
 
-@interface EditViewController ()
+@interface EditsTableViewController ()
 
 @end
 
-@implementation EditViewController
+@implementation EditsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     UIButton *flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [flagButton addTarget:self action:@selector(flagMethod) forControlEvents:UIControlEventTouchUpInside];
     
-    [flagButton setTitle:@"Add flag" forState:UIControlStateNormal];
+    [flagButton setTitle:@"Flag" forState:UIControlStateNormal];
     
-    flagButton.frame = CGRectMake(300, 160, 40 , 40);
+    flagButton.frame = CGRectMake(300, 14, 60 , 60);
     
-    flagButton.layer.zPosition = -1000;
+    [flagButton setBackgroundImage:[UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
     
     [self.view addSubview:flagButton];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
 }
-
-//- (void) flagMethod
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Table view data source
+-(void)flagMethod {
+    NSLog(@"Button Test");
+}
+
+/*#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    return 1;
+#warning Incomplete implementation, return the number of sections
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return 1;
+#warning Incomplete implementation, return the number of rows
+    return 0;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"todoCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
     
     return cell;
 }
-
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -97,7 +92,7 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -105,6 +100,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-
+*/
 
 @end

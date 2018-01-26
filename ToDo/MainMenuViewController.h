@@ -1,5 +1,5 @@
 //
-//  EditViewController.h
+//  MainMenuViewController.h
 //  ToDo
 //
 //  Created by Eric Groseclos on 2018-01-26.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UITableViewController
+@interface MainMenuViewController : UIViewController
 
 @end

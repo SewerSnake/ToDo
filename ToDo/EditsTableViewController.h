@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  EditsTableViewController.h
 //  ToDo
 //
 //  Created by Eric Groseclos on 2018-01-26.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface EditsTableViewController : UITableViewController
 
 @end
-

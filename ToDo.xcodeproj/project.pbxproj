@@ -8,21 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		184DC8EF201B1DAF00621D78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC8EE201B1DAF00621D78 /* AppDelegate.m */; };
-		184DC8F2201B1DAF00621D78 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC8F1201B1DAF00621D78 /* ViewController.m */; };
 		184DC8F5201B1DAF00621D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F3201B1DAF00621D78 /* Main.storyboard */; };
 		184DC8F7201B1DAF00621D78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F6201B1DAF00621D78 /* Assets.xcassets */; };
 		184DC8FA201B1DAF00621D78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F8201B1DAF00621D78 /* LaunchScreen.storyboard */; };
 		184DC8FD201B1DAF00621D78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC8FC201B1DAF00621D78 /* main.m */; };
 		184DC904201B214300621D78 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC903201B214300621D78 /* Model.m */; };
-		184DC908201B34D700621D78 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC907201B34D700621D78 /* EditViewController.m */; };
+		184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90A201B811500621D78 /* EditsTableViewController.m */; };
+		184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90D201B8D7E00621D78 /* MainMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		184DC8EA201B1DAF00621D78 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184DC8ED201B1DAF00621D78 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184DC8EE201B1DAF00621D78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		184DC8F0201B1DAF00621D78 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		184DC8F1201B1DAF00621D78 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		184DC8F4201B1DAF00621D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		184DC8F6201B1DAF00621D78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184DC8F9201B1DAF00621D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -30,8 +28,10 @@
 		184DC8FC201B1DAF00621D78 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		184DC903201B214300621D78 /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		184DC905201B215E00621D78 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
-		184DC906201B34D700621D78 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		184DC907201B34D700621D78 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		184DC909201B811500621D78 /* EditsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditsTableViewController.h; sourceTree = "<group>"; };
+		184DC90A201B811500621D78 /* EditsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditsTableViewController.m; sourceTree = "<group>"; };
+		184DC90C201B8D7E00621D78 /* MainMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		184DC90D201B8D7E00621D78 /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +66,6 @@
 			children = (
 				184DC8ED201B1DAF00621D78 /* AppDelegate.h */,
 				184DC8EE201B1DAF00621D78 /* AppDelegate.m */,
-				184DC8F0201B1DAF00621D78 /* ViewController.h */,
-				184DC8F1201B1DAF00621D78 /* ViewController.m */,
 				184DC8F3201B1DAF00621D78 /* Main.storyboard */,
 				184DC8F6201B1DAF00621D78 /* Assets.xcassets */,
 				184DC8F8201B1DAF00621D78 /* LaunchScreen.storyboard */,
@@ -75,8 +73,10 @@
 				184DC8FC201B1DAF00621D78 /* main.m */,
 				184DC903201B214300621D78 /* Model.m */,
 				184DC905201B215E00621D78 /* Model.h */,
-				184DC906201B34D700621D78 /* EditViewController.h */,
-				184DC907201B34D700621D78 /* EditViewController.m */,
+				184DC909201B811500621D78 /* EditsTableViewController.h */,
+				184DC90A201B811500621D78 /* EditsTableViewController.m */,
+				184DC90C201B8D7E00621D78 /* MainMenuViewController.h */,
+				184DC90D201B8D7E00621D78 /* MainMenuViewController.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -152,11 +152,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				184DC8F2201B1DAF00621D78 /* ViewController.m in Sources */,
 				184DC8FD201B1DAF00621D78 /* main.m in Sources */,
 				184DC8EF201B1DAF00621D78 /* AppDelegate.m in Sources */,
 				184DC904201B214300621D78 /* Model.m in Sources */,
-				184DC908201B34D700621D78 /* EditViewController.m in Sources */,
+				184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */,
+				184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
