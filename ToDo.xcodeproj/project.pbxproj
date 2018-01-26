@@ -13,6 +13,8 @@
 		184DC8F7201B1DAF00621D78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F6201B1DAF00621D78 /* Assets.xcassets */; };
 		184DC8FA201B1DAF00621D78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F8201B1DAF00621D78 /* LaunchScreen.storyboard */; };
 		184DC8FD201B1DAF00621D78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC8FC201B1DAF00621D78 /* main.m */; };
+		184DC904201B214300621D78 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC903201B214300621D78 /* Model.m */; };
+		184DC908201B34D700621D78 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC907201B34D700621D78 /* EditViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		184DC8F9201B1DAF00621D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184DC8FB201B1DAF00621D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184DC8FC201B1DAF00621D78 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		184DC903201B214300621D78 /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		184DC905201B215E00621D78 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		184DC906201B34D700621D78 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		184DC907201B34D700621D78 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,10 @@
 				184DC8F8201B1DAF00621D78 /* LaunchScreen.storyboard */,
 				184DC8FB201B1DAF00621D78 /* Info.plist */,
 				184DC8FC201B1DAF00621D78 /* main.m */,
+				184DC903201B214300621D78 /* Model.m */,
+				184DC905201B215E00621D78 /* Model.h */,
+				184DC906201B34D700621D78 /* EditViewController.h */,
+				184DC907201B34D700621D78 /* EditViewController.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -145,6 +155,8 @@
 				184DC8F2201B1DAF00621D78 /* ViewController.m in Sources */,
 				184DC8FD201B1DAF00621D78 /* main.m in Sources */,
 				184DC8EF201B1DAF00621D78 /* AppDelegate.m in Sources */,
+				184DC904201B214300621D78 /* Model.m in Sources */,
+				184DC908201B34D700621D78 /* EditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
