@@ -7,12 +7,19 @@
 //
 
 #import "EditsTableViewController.h"
+#import "Model.h"
 
 @interface EditsTableViewController ()
 
 @property (nonatomic) UIButton *flagButton;
 
+@property (weak, nonatomic) IBOutlet UITextField *task;
+
+@property (weak, nonatomic) IBOutlet UITextView *taskNotes;
+
 @property (nonatomic) BOOL isImportant;
+
+@property (nonatomic) Model *model;
 
 @end
 
@@ -22,7 +29,7 @@
     [super viewDidLoad];
     self.isImportant = NO;
     [self createButton];
-
+    _model = [[Model alloc]init];
 }
 
 // Creates a button that allows the user to
@@ -47,26 +54,24 @@
     if (self.isImportant) {
         [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
         self.isImportant = NO;
-        NSLog(@"Not important!");
     } else {
         [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star2.png"] forState:UIControlStateNormal];
         self.isImportant = YES;
-        NSLog(@"Important Task!");
+    }
+}
+
+// Saves what the user wrote to NSUserDefaults
+// via the model class.
+- (IBAction)save:(id)sender {
+    if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
+        [_model saveInfo:self.task.text saveNotes:self.taskNotes.text];
+    } else {
+        self.task.text = @"You must enter text!";
     }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-}
-
 
 @end

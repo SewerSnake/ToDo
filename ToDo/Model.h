@@ -8,4 +8,8 @@
 
 @interface Model : NSObject
 
+- (NSDictionary*)getData;
+
+- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes;
+
 @end

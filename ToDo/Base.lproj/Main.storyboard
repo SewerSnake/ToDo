@@ -88,6 +88,14 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgJ-YI-IoV">
+                                                    <rect key="frame" x="164" y="471" width="46" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Save"/>
+                                                    <connections>
+                                                        <action selector="save:" destination="mqH-f1-Xge" eventType="touchUpInside" id="PLO-B6-YmD"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -99,6 +107,10 @@
                             <outlet property="delegate" destination="mqH-f1-Xge" id="gK4-NO-bd4"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="task" destination="Rpk-iM-bcG" id="Gyh-cx-gVQ"/>
+                        <outlet property="taskNotes" destination="TWA-vH-TAU" id="4gb-xU-fzv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fV7-ce-U4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,7 +119,7 @@
         <!--To-do list-->
         <scene sceneID="99a-BV-JIW">
             <objects>
-                <tableViewController id="4ZP-Ev-cn0" sceneMemberID="viewController">
+                <tableViewController id="4ZP-Ev-cn0" customClass="ListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oRX-Sd-zYd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +142,7 @@
                     <navigationItem key="navigationItem" title="To-do list" id="a6f-Jx-j9g">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aMP-Pa-2Sj">
                             <connections>
-                                <segue destination="mqH-f1-Xge" kind="show" id="JoF-Co-ZEu"/>
+                                <segue destination="mqH-f1-Xge" kind="show" identifier="taskSegue" id="JoF-Co-ZEu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

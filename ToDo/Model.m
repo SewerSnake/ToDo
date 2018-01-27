@@ -11,5 +11,14 @@
 
 @implementation Model
 
+- (NSDictionary*)getData {
+    return nil;
+}
+
+- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+}
+
 @end
 

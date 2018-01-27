@@ -15,6 +15,7 @@
 		184DC904201B214300621D78 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC903201B214300621D78 /* Model.m */; };
 		184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90A201B811500621D78 /* EditsTableViewController.m */; };
 		184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90D201B8D7E00621D78 /* MainMenuViewController.m */; };
+		184DC911201BD5C500621D78 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC910201BD5C500621D78 /* ListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		184DC90A201B811500621D78 /* EditsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditsTableViewController.m; sourceTree = "<group>"; };
 		184DC90C201B8D7E00621D78 /* MainMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		184DC90D201B8D7E00621D78 /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		184DC90F201BD5C500621D78 /* ListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
+		184DC910201BD5C500621D78 /* ListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				184DC90A201B811500621D78 /* EditsTableViewController.m */,
 				184DC90C201B8D7E00621D78 /* MainMenuViewController.h */,
 				184DC90D201B8D7E00621D78 /* MainMenuViewController.m */,
+				184DC90F201BD5C500621D78 /* ListTableViewController.h */,
+				184DC910201BD5C500621D78 /* ListTableViewController.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				184DC904201B214300621D78 /* Model.m in Sources */,
 				184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */,
 				184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */,
+				184DC911201BD5C500621D78 /* ListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
