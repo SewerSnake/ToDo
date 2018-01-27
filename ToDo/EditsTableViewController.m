@@ -64,7 +64,9 @@
 // via the model class.
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
+        
         [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         self.task.text = @"You must enter text!";

@@ -8,9 +8,15 @@
 
 @interface Model : NSObject
 
-@property (nonatomic) NSInteger taskIndex;
+- (void)loadTaskAmount;
 
-- (NSDictionary*)getData;
+- (NSInteger)getTaskAmount;
+
+- (NSMutableArray*)getTasks;
+
+- (NSMutableArray*)getTaskNotes;
+
+- (NSMutableArray*)getPriorities;
 
 - (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
 

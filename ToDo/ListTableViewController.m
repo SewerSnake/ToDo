@@ -11,7 +11,11 @@
 
 @interface ListTableViewController ()
 
-@property (nonatomic) NSDictionary *data;
+@property (nonatomic) NSMutableArray *tasks;
+
+@property (nonatomic) NSMutableArray *taskNotes;
+
+@property (nonatomic) NSMutableArray *prioritizer;
 
 @property (nonatomic) Model *model;
 
@@ -25,15 +29,25 @@
     [self loadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+// Unnecessary?
+/*- (void)viewDidAppear:(BOOL)animated {
+    [_model loadtaskAmount];
     self.model = [[Model alloc] init];
     [self loadData];
-}
+}*/
 
 // Loads data from NSUserDefaults into
 // the data dictionary via the model class.
 - (void) loadData {
-    self.data = [_model getData];
+    if ([_model getTasks].count != 0 && [_model getTasks] != nil) {
+        self.tasks = [_model getTasks];
+    }
+    if ([_model getTaskNotes].count != 0 && [_model getTaskNotes] != nil) {
+        self.taskNotes = [_model getTaskNotes];
+    }
+    if ([_model getPriorities].count != 0 && [_model getPriorities] != nil) {
+        self.prioritizer = [_model getPriorities];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,22 +57,32 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    
+    if ([_model getTaskAmount] == 0) {
+        return 0;
+    } else {
+        return [_model getTaskAmount];
+    }
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    
+    UILabel *taskName = cell.textLabel;
+    //NSLog(@"%@", @([_model getTaskAmount]).stringValue);
+    
+    if (self.tasks[indexPath.row] != nil) {
+        taskName.text = self.tasks[indexPath.row];
+    }
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -99,10 +123,7 @@
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"taskSegue"]) {
-        NSLog(@"Segue");
-        UITableViewCell *cell = sender;
-        UITableViewController *edits = [segue destinationViewController];
-        edits.title = @"Test";
+        [_model loadTaskAmount];
     }
 }
 
