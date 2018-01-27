@@ -8,8 +8,10 @@
 
 @interface Model : NSObject
 
+@property (nonatomic) NSInteger taskIndex;
+
 - (NSDictionary*)getData;
 
-- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes;
+- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
 
 @end
