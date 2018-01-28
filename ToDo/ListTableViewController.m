@@ -7,9 +7,12 @@
 //
 
 #import "ListTableViewController.h"
+#import "EditsTableViewController.h"
 #import "Model.h"
 
 @interface ListTableViewController ()
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) NSMutableArray *tasks;
 
@@ -28,13 +31,6 @@
     self.model = [[Model alloc] init];
     [self loadData];
 }
-
-// Unnecessary?
-/*- (void)viewDidAppear:(BOOL)animated {
-    [_model loadtaskAmount];
-    self.model = [[Model alloc] init];
-    [self loadData];
-}*/
 
 // Loads data from NSUserDefaults into
 // the data dictionary via the model class.
@@ -122,8 +118,16 @@
 
 //
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"taskSegue"]) {
+    if ([segue.identifier isEqualToString:@"taskSegue"]) {
         [_model loadTaskAmount];
+    } else if ([segue.identifier isEqualToString:@"editTask"]) {
+        //UITableViewCell *cell = sender;
+        
+        /*EditsTableViewController *editTask = [segue destinationViewController];
+        
+        NSIndexPath *task = self.tableView.indexPathForSelectedRow;
+        
+        editTask.taskToLoad = task.row;*/
     }
 }
 

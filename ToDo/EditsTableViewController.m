@@ -27,9 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _model = [[Model alloc]init];
     self.isImportant = NO;
     [self createButton];
-    _model = [[Model alloc]init];
+    NSLog(@"%@",@(self.taskToLoad).stringValue);
 }
 
 // Creates a button that allows the user to

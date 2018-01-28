@@ -10,4 +10,6 @@
 
 @interface EditsTableViewController : UITableViewController
 
+@property (nonatomic) NSInteger taskToLoad;
+
 @end
