@@ -30,8 +30,9 @@
     _model = [[Model alloc]init];
     if (_taskToLoad != -1) {
         [self loadTask];
+    } else {
+        self.isImportant = NO;
     }
-    self.isImportant = NO;
     [self createButton];
     
 }
@@ -47,7 +48,11 @@
     
     self.flagButton.frame = CGRectMake(300, 8, 30 , 30);
     
-    [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
+    if (self.isImportant) {
+        [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star2.png"] forState:UIControlStateNormal];
+    } else {
+        [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
+    }
     
     [self.view addSubview:self.flagButton];
 }
@@ -85,9 +90,11 @@
 // Loads the task info via the row number
 // provided from ListTableViewController.
 - (void)loadTask {
+    
     NSLog(@"%@",@(self.taskToLoad).stringValue);
     self.task.text = [_model getSingleTask:self.taskToLoad];
     self.taskNotes.text = [_model getSingleTaskNote:self.taskToLoad];
+    self.isImportant = [_model getSinglePriority:self.taskToLoad];
 }
 
 - (void)didReceiveMemoryWarning {

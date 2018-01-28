@@ -107,6 +107,14 @@
     return priorities;
 }
 
+- (BOOL)getSinglePriority:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    NSString *priority = [preferences objectForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]];
+    
+    return priority;
+}
+
 // Saves the task header, the task notes and
 // the crucial 'priority' variable to
 // NSUserDefaults. Used when a task
