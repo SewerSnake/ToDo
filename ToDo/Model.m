@@ -86,7 +86,7 @@
 - (NSString*)getSingleTaskNote:(NSInteger)rowNumber {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
-    NSString *taskNote = [preferences objectForKey:[@"task" stringByAppendingString:@(rowNumber).stringValue]];
+    NSString *taskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(rowNumber).stringValue]];
     
     return taskNote;
 }
@@ -109,7 +109,8 @@
 
 // Saves the task header, the task notes and
 // the crucial 'priority' variable to
-// NSUserDefaults.
+// NSUserDefaults. Used when a task
+// is created for the first time.
 - (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL) isImportant {
     
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
@@ -130,6 +131,29 @@
     
     [preferences synchronize];
     
+}
+
+// Saves the task header, the task notes and
+// the crucial 'priority' variable to
+// the specific row. Used while editing
+// an existing task.
+- (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL) isImportant {
+    
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    NSString *index1 = [@"task" stringByAppendingString:@(rowNumber).stringValue];
+    
+    NSString *index2 = [@"taskNote" stringByAppendingString:@(rowNumber).stringValue];
+    
+    NSString *index3 = [@"priority" stringByAppendingString:@(rowNumber).stringValue];
+    
+    [preferences setObject:task forKey:index1];
+    
+    [preferences setObject:taskNotes forKey:index2];
+    
+    [preferences setBool:isImportant forKey:index3];
+    
+    [preferences synchronize];
 }
 
 @end

@@ -65,11 +65,16 @@
 }
 
 // Saves what the user wrote to NSUserDefaults
-// via the model class.
+// via the model class. Dismisses this view
+// and returns to the main menu.
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
-        [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+        if (_taskToLoad != -1) {
+            [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+        } else {
+            [_model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+        }
         
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
