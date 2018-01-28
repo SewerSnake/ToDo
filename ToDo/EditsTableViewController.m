@@ -28,9 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _model = [[Model alloc]init];
+    if (_taskToLoad != -1) {
+        [self loadTask];
+    }
     self.isImportant = NO;
     [self createButton];
-    NSLog(@"%@",@(self.taskToLoad).stringValue);
+    
 }
 
 // Creates a button that allows the user to
@@ -72,6 +75,14 @@
     } else {
         self.task.text = @"You must enter text!";
     }
+}
+
+// Loads the task info via the row number
+// provided from ListTableViewController.
+- (void)loadTask {
+    NSLog(@"%@",@(self.taskToLoad).stringValue);
+    self.task.text = [_model getSingleTask:self.taskToLoad];
+    self.taskNotes.text = [_model getSingleTaskNote:self.taskToLoad];
 }
 
 - (void)didReceiveMemoryWarning {

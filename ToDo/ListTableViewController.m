@@ -120,14 +120,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"taskSegue"]) {
         [_model loadTaskAmount];
-    } else if ([segue.identifier isEqualToString:@"editTask"]) {
+        EditsTableViewController *editTask = [segue destinationViewController];
+        editTask.taskToLoad = -1;
+    } else if ([segue.identifier isEqualToString:@"editTaskSegue"]) {
+        
         //UITableViewCell *cell = sender;
         
-        /*EditsTableViewController *editTask = [segue destinationViewController];
+        EditsTableViewController *editTask = [segue destinationViewController];
         
         NSIndexPath *task = self.tableView.indexPathForSelectedRow;
         
-        editTask.taskToLoad = task.row;*/
+        editTask.taskToLoad = task.row;
     }
 }
 

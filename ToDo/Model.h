@@ -14,7 +14,11 @@
 
 - (NSMutableArray*)getTasks;
 
+- (NSString*)getSingleTask:(NSInteger)rowNumber;
+
 - (NSMutableArray*)getTaskNotes;
+
+- (NSString*)getSingleTaskNote:(NSInteger)rowNumber;
 
 - (NSMutableArray*)getPriorities;
 

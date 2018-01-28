@@ -151,7 +151,7 @@
                                             <state key="normal" title="Edit"/>
                                             <connections>
                                                 <action selector="editTask:" destination="4ZP-Ev-cn0" eventType="touchUpInside" id="Aaq-s5-uCZ"/>
-                                                <segue destination="mqH-f1-Xge" kind="show" identifier="editTask" id="Qb3-SL-wLg"/>
+                                                <segue destination="mqH-f1-Xge" kind="show" identifier="editTaskSegue" id="waE-GJ-xe8"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -201,6 +201,6 @@
         <image name="todo list" width="926" height="1280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ScH-4F-erd"/>
+        <segue reference="waE-GJ-xe8"/>
     </inferredMetricsTieBreakers>
 </document>

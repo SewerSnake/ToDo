@@ -59,6 +59,14 @@
     return tasks;
 }
 
+- (NSString*)getSingleTask:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(rowNumber).stringValue]];
+    
+    return task;
+}
+
 - (NSMutableArray*)getTaskNotes {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     NSMutableArray *taskNotes = [NSMutableArray array];
@@ -73,6 +81,14 @@
     }
     
     return taskNotes;
+}
+
+- (NSString*)getSingleTaskNote:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    NSString *taskNote = [preferences objectForKey:[@"task" stringByAppendingString:@(rowNumber).stringValue]];
+    
+    return taskNote;
 }
 
 - (NSMutableArray*)getPriorities {
@@ -92,7 +108,7 @@
 }
 
 // Saves the task header, the task notes and
-// the crucial 'important' variable to
+// the crucial 'priority' variable to
 // NSUserDefaults.
 - (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL) isImportant {
     
@@ -101,11 +117,11 @@
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
     
     NSString *index1 = [@"task" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(task);
+   
     NSString *index2 = [@"taskNote" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(taskNotes);
+   
     NSString *index3 = [@"priority" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(@(isImportant).stringValue);
+   
     [preferences setObject:task forKey:index1];
     
     [preferences setObject:taskNotes forKey:index2];
