@@ -40,9 +40,9 @@
     if ([_model getTaskNotes].count != 0 && [_model getTaskNotes] != nil) {
         self.taskNotes = [_model getTaskNotes];
     }
-    if ([_model getPriorities].count != 0 && [_model getPriorities] != nil) {
+    /*if ([_model getPriorities].count != 0 && [_model getPriorities] != nil) {
         self.prioritizer = [_model getPriorities];
-    }
+    }*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,17 +69,17 @@
         [self loadData];
     }
     
-    NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
+    //NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     UILabel *taskName = cell.textLabel;
     UIImageView *importantTask = cell.imageView;
-    NSLog(@"%@",self.tasks[indexPath.row]);
+    //NSLog(@"%@",self.tasks[indexPath.row]);
     if (self.tasks[indexPath.row] != nil) {
         
         taskName.text = self.tasks[indexPath.row];
         
-        if ([_model getSinglePriority:indexPath.row]) {
+        if ([_model getSinglePriority:indexPath.row + 1]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
             importantTask.contentMode = UIViewContentModeScaleAspectFit;
         }
@@ -125,11 +125,18 @@
 
 #pragma mark - Navigation
 
-//
+// Provides the row number of the clicked cell to
+// EditsTableViewController, in case 'editTaskSegue'.
+// As the cell index starts from zero, the row number
+// must be increased by one.
+// taskToLoad is set to -1 in 'taskSegue':s case, as a task is
+// to be created for the first time.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"taskSegue"]) {
         [_model loadTaskAmount];
+        
         EditsTableViewController *editTask = [segue destinationViewController];
+        
         editTask.taskToLoad = -1;
     } else if ([segue.identifier isEqualToString:@"editTaskSegue"]) {
         
@@ -139,7 +146,7 @@
         
         NSIndexPath *task = self.tableView.indexPathForSelectedRow;
         
-        editTask.taskToLoad = task.row;
+        editTask.taskToLoad = task.row + 1;
     }
 }
 

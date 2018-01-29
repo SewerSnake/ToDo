@@ -64,7 +64,11 @@
     
     NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(rowNumber).stringValue]];
     
-    return task;
+    if (task != nil) {
+        return task;
+    } else {
+        return @"";
+    }
 }
 
 - (NSMutableArray*)getTaskNotes {
@@ -88,7 +92,11 @@
     
     NSString *taskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(rowNumber).stringValue]];
     
-    return taskNote;
+    if (taskNote != nil) {
+        return taskNote;
+    } else {
+        return @"";
+    }
 }
 
 - (NSMutableArray*)getPriorities {
@@ -97,10 +105,14 @@
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
     
     for (int i = 1; i <= taskAmount; i++) {
-        NSString *priority = [preferences objectForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
+        BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
         
-        if (priority != nil) {
-            [priorities addObject:priority];
+        if (priority != 0) {
+            if (priority) {
+                [priorities addObject:@"YES"];
+            } else {
+                [priorities addObject:@"NO"];
+            }
         }
     }
     
@@ -110,9 +122,14 @@
 - (BOOL)getSinglePriority:(NSInteger)rowNumber {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
-    NSString *priority = [preferences objectForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]];
-    
-    return priority;
+    if ([preferences objectForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]] != nil) {
+        
+        BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]];
+        
+        return priority;
+    } else {
+        return NO;
+    }
 }
 
 // Saves the task header, the task notes and
