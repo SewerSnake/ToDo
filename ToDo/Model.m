@@ -51,7 +51,7 @@
     if (task != nil) {
         return task;
     } else {
-        return @"";
+        return @"Cannot find";
     }
 }
 
@@ -63,7 +63,7 @@
     if (taskNote != nil) {
         return taskNote;
     } else {
-        return @"";
+        return @"Cannot find";
     }
 }
 
@@ -75,6 +75,19 @@
         BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]];
         
         return priority;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)getCompletionStatus:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    if ([preferences objectForKey:[@"completed" stringByAppendingString:@(rowNumber).stringValue]] != nil) {
+        
+        BOOL completionStatus = [preferences boolForKey:[@"completed" stringByAppendingString:@(rowNumber).stringValue]];
+        
+        return completionStatus;
     } else {
         return NO;
     }
@@ -97,6 +110,7 @@
     NSString *index3 = [@"priority" stringByAppendingString:@(taskAmount).stringValue];
     //NSLog(@"%@",index3);
     NSString *index4 = [@"completed" stringByAppendingString:@(taskAmount).stringValue];
+    
     [preferences setObject:task forKey:index1];
     
     [preferences setObject:taskNotes forKey:index2];
