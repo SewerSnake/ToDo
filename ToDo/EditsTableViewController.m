@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _model = [[Model alloc]init];
-    if (_taskToLoad != -1) {
+    if (self.taskToLoad != -1) {
         [self loadTask];
     } else {
         self.isImportant = NO;
@@ -75,7 +75,7 @@
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
-        if (_taskToLoad != -1) {
+        if (self.taskToLoad == -1) {
             [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
         } else {
             [_model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
@@ -90,7 +90,6 @@
 // Loads the task info via the row number
 // provided from ListTableViewController.
 - (void)loadTask {
-    
     NSLog(@"%@",@(self.taskToLoad).stringValue);
     self.task.text = [_model getSingleTask:self.taskToLoad];
     self.taskNotes.text = [_model getSingleTaskNote:self.taskToLoad];

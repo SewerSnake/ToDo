@@ -39,7 +39,7 @@
 - (NSInteger)getTaskAmount {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    NSLog(@"%@", @(taskAmount).stringValue);
+    //NSLog(@"%@", @(taskAmount).stringValue);
     return taskAmount;
 }
 
@@ -124,13 +124,13 @@
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    
+    NSLog(@"Task %@",@(taskAmount).stringValue);
     NSString *index1 = [@"task" stringByAppendingString:@(taskAmount).stringValue];
-   
+    NSLog(@"%@",index1);
     NSString *index2 = [@"taskNote" stringByAppendingString:@(taskAmount).stringValue];
-   
+    NSLog(@"%@",index2);
     NSString *index3 = [@"priority" stringByAppendingString:@(taskAmount).stringValue];
-   
+    NSLog(@"%@",index3);
     [preferences setObject:task forKey:index1];
     
     [preferences setObject:taskNotes forKey:index2];

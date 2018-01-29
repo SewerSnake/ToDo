@@ -29,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.model = [[Model alloc] init];
-    [self loadData];
 }
 
 // Loads data from NSUserDefaults into
@@ -66,14 +65,24 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [self loadData];
+    }
     
+    NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     UILabel *taskName = cell.textLabel;
-    //NSLog(@"%@", @([_model getTaskAmount]).stringValue);
-    
+    UIImageView *importantTask = cell.imageView;
+    NSLog(@"%@",self.tasks[indexPath.row]);
     if (self.tasks[indexPath.row] != nil) {
+        
         taskName.text = self.tasks[indexPath.row];
+        
+        if ([_model getSinglePriority:indexPath.row]) {
+            importantTask.image = [UIImage imageNamed:@"important.png"];
+            importantTask.contentMode = UIViewContentModeScaleAspectFit;
+        }
     }
     
     return cell;
