@@ -43,22 +43,6 @@
     return taskAmount;
 }
 
-- (NSMutableArray*)getTasks {
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *tasks = [NSMutableArray array];
-    NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    
-    for (int i = 1; i <= taskAmount; i++) {
-        NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(i).stringValue]];
-        
-        if (task != nil) {
-            [tasks addObject:task];
-        }
-    }
-    
-    return tasks;
-}
-
 - (NSString*)getSingleTask:(NSInteger)rowNumber {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
@@ -71,22 +55,6 @@
     }
 }
 
-- (NSMutableArray*)getTaskNotes {
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *taskNotes = [NSMutableArray array];
-    NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    
-    for (int i = 1; i <= taskAmount; i++) {
-        NSString *taskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(i).stringValue]];
-        
-        if (taskNote != nil) {
-            [taskNotes addObject:taskNote];
-        }
-    }
-    
-    return taskNotes;
-}
-
 - (NSString*)getSingleTaskNote:(NSInteger)rowNumber {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
@@ -97,26 +65,6 @@
     } else {
         return @"";
     }
-}
-
-- (NSMutableArray*)getPriorities {
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *priorities = [NSMutableArray array];
-    NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    
-    for (int i = 1; i <= taskAmount; i++) {
-        BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
-        
-        if (priority != 0) {
-            if (priority) {
-                [priorities addObject:@"YES"];
-            } else {
-                [priorities addObject:@"NO"];
-            }
-        }
-    }
-    
-    return priorities;
 }
 
 - (BOOL)getSinglePriority:(NSInteger)rowNumber {
@@ -136,23 +84,26 @@
 // the crucial 'priority' variable to
 // NSUserDefaults. Used when a task
 // is created for the first time.
-- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL) isImportant {
+- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant completed:(BOOL)isCompleted {
     
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
     NSLog(@"Task %@",@(taskAmount).stringValue);
     NSString *index1 = [@"task" stringByAppendingString:@(taskAmount).stringValue];
-    NSLog(@"%@",index1);
+    //NSLog(@"%@",index1);
     NSString *index2 = [@"taskNote" stringByAppendingString:@(taskAmount).stringValue];
-    NSLog(@"%@",index2);
+    //NSLog(@"%@",index2);
     NSString *index3 = [@"priority" stringByAppendingString:@(taskAmount).stringValue];
-    NSLog(@"%@",index3);
+    //NSLog(@"%@",index3);
+    NSString *index4 = [@"completed" stringByAppendingString:@(taskAmount).stringValue];
     [preferences setObject:task forKey:index1];
     
     [preferences setObject:taskNotes forKey:index2];
     
     [preferences setBool:isImportant forKey:index3];
+    
+    [preferences setBool:NO forKey:index4];
     
     [preferences synchronize];
     

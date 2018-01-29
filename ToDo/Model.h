@@ -12,20 +12,14 @@
 
 - (NSInteger)getTaskAmount;
 
-- (NSMutableArray*)getTasks;
-
 - (NSString*)getSingleTask:(NSInteger)rowNumber;
-
-- (NSMutableArray*)getTaskNotes;
 
 - (NSString*)getSingleTaskNote:(NSInteger)rowNumber;
 
-- (NSMutableArray*)getPriorities;
-
 - (BOOL)getSinglePriority:(NSInteger)rowNumber;
 
-- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
+- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant completed:(BOOL)isCompleted;
 
-- (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL) isImportant;
+- (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
 
 @end

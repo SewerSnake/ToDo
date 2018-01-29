@@ -76,7 +76,7 @@
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
         if (self.taskToLoad == -1) {
-            [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+            [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant completed:NO];
         } else {
             [_model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
         }

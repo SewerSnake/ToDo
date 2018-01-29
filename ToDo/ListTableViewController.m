@@ -18,8 +18,6 @@
 
 @property (nonatomic) NSMutableArray *taskNotes;
 
-@property (nonatomic) NSMutableArray *prioritizer;
-
 @property (nonatomic) Model *model;
 
 @end
@@ -29,20 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.model = [[Model alloc] init];
-}
-
-// Loads data from NSUserDefaults into
-// the data dictionary via the model class.
-- (void) loadData {
-    if ([_model getTasks].count != 0 && [_model getTasks] != nil) {
-        self.tasks = [_model getTasks];
-    }
-    if ([_model getTaskNotes].count != 0 && [_model getTaskNotes] != nil) {
-        self.taskNotes = [_model getTaskNotes];
-    }
-    /*if ([_model getPriorities].count != 0 && [_model getPriorities] != nil) {
-        self.prioritizer = [_model getPriorities];
-    }*/
+    self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 100.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,9 +52,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [self loadData];
-    }
     
     //NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
@@ -75,13 +59,13 @@
     UILabel *taskName = cell.textLabel;
     UIImageView *importantTask = cell.imageView;
     //NSLog(@"%@",self.tasks[indexPath.row]);
-    if (self.tasks[indexPath.row] != nil) {
+    if ([_model getSingleTask:indexPath.row] != nil) {
         
-        taskName.text = self.tasks[indexPath.row];
+        taskName.text = [_model getSingleTask:indexPath.row];
         
         if ([_model getSinglePriority:indexPath.row + 1]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
-            importantTask.contentMode = UIViewContentModeScaleAspectFit;
+            importantTask.contentMode = UIViewContentModeScaleToFill;
         }
     }
     
