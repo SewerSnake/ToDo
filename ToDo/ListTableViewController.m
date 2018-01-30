@@ -38,16 +38,18 @@
 
 #pragma mark - Table view data source
 
+// There is a single section in the used TableView.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
+// The number of rows is equal to the number of tasks.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([_model getTaskAmount] == 0) {
+    if ([self.model getTaskAmount] == 0) {
         return 0;
     } else {
-        return [_model getTaskAmount];
+        return [self.model getTaskAmount];
     }
 }
 
@@ -59,11 +61,11 @@
     UILabel *taskName = cell.textLabel;
     UIImageView *importantTask = cell.imageView;
     //NSLog(@"%@",self.tasks[indexPath.row]);
-    if ([_model getSingleTask:indexPath.row] != nil) {
+    if ([self.model getSingleTask:indexPath.row] != nil) {
         
-        taskName.text = [_model getSingleTask:indexPath.row];
+        taskName.text = [self.model getSingleTask:indexPath.row + 1];
         
-        if ([_model getSinglePriority:indexPath.row + 1]) {
+        if ([self.model getSinglePriority:indexPath.row + 1]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
             importantTask.contentMode = UIViewContentModeScaleToFill;
         }
@@ -117,7 +119,7 @@
 // to be created for the first time.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"taskSegue"]) {
-        [_model loadTaskAmount];
+        [self.model loadTaskAmount];
         
         EditsTableViewController *editTask = [segue destinationViewController];
         

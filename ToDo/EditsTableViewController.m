@@ -27,14 +27,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _model = [[Model alloc]init];
+    
+    self.model = [[Model alloc]init];
+    
     if (self.taskToLoad != -1) {
         [self loadTask];
     } else {
         self.isImportant = NO;
     }
-    [self createButton];
     
+    [self createButton];
 }
 
 // Creates a button that allows the user to
@@ -43,8 +45,6 @@
     self.flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [self.flagButton addTarget:self action:@selector(flagMethod) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.flagButton setTitle:@"" forState:UIControlStateNormal];
     
     self.flagButton.frame = CGRectMake(300, 8, 30 , 30);
     
@@ -76,9 +76,9 @@
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
         if (self.taskToLoad == -1) {
-            [_model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant completed:NO];
+            [self.model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant completed:NO];
         } else {
-            [_model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+            [self.model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
         }
         
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -91,9 +91,9 @@
 // provided from ListTableViewController.
 - (void)loadTask {
     NSLog(@"%@",@(self.taskToLoad).stringValue);
-    self.task.text = [_model getSingleTask:self.taskToLoad];
-    self.taskNotes.text = [_model getSingleTaskNote:self.taskToLoad];
-    self.isImportant = [_model getSinglePriority:self.taskToLoad];
+    self.task.text = [self.model getSingleTask:self.taskToLoad];
+    self.taskNotes.text = [self.model getSingleTaskNote:self.taskToLoad];
+    self.isImportant = [self.model getSinglePriority:self.taskToLoad];
 }
 
 - (void)didReceiveMemoryWarning {
