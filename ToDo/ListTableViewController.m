@@ -54,18 +54,31 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger rowNumber = indexPath.row + 1;
     
+    BOOL isCompleted = NO;
     //NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    
+    if ([self.model getCompletionStatus:rowNumber]) {
+        // Reorder so that completed tasks appear at the
+        // beginning of the list.
+        isCompleted = YES;
+    }
     
     UILabel *taskName = cell.textLabel;
     UIImageView *importantTask = cell.imageView;
     //NSLog(@"%@",self.tasks[indexPath.row]);
     if ([self.model getSingleTask:indexPath.row] != nil) {
         
-        taskName.text = [self.model getSingleTask:indexPath.row + 1];
+        taskName.text = [self.model getSingleTask:rowNumber];
         
-        if ([self.model getSinglePriority:indexPath.row + 1]) {
+        if (!isCompleted) {
+            taskName.textColor = [UIColor greenColor];
+            // Disable the completeButton
+        }
+        
+        if ([self.model getSinglePriority:rowNumber]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
             importantTask.contentMode = UIViewContentModeScaleToFill;
         }

@@ -30,8 +30,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNj-8b-RWq">
-                                <rect key="frame" x="140" y="431" width="93" height="30"/>
+                                <rect key="frame" x="129" y="426" width="116" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="View your list"/>
                                 <connections>
                                     <segue destination="4Hi-uj-s69" kind="show" id="tPY-Sr-gzk"/>
@@ -91,6 +92,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgJ-YI-IoV">
                                                     <rect key="frame" x="164" y="471" width="46" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Save"/>
                                                     <connections>
                                                         <action selector="save:" destination="mqH-f1-Xge" eventType="touchUpInside" id="PLO-B6-YmD"/>

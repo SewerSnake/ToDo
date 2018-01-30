@@ -112,6 +112,9 @@
 		184DC8E2201B1DAF00621D78 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					completeButton,
+				);
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Eric Groseclos";
 				TargetAttributes = {
