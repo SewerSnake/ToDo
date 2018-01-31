@@ -9,10 +9,9 @@
 #import "ListTableViewController.h"
 #import "EditsTableViewController.h"
 #import "Model.h"
+#import "ToDoTableViewCell.h"
 
 @interface ListTableViewController ()
-
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) NSMutableArray *tasks;
 
@@ -27,9 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.model = [[Model alloc] init];
-    self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 100.0;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,29 +59,31 @@
     
     BOOL isCompleted = NO;
     //NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     if ([self.model getCompletionStatus:rowNumber]) {
-        // Reorder so that completed tasks appear at the
-        // beginning of the list.
+        //Reorder the table so that completed tasks appear at the beginning/end of the list.
         isCompleted = YES;
     }
     
-    UILabel *taskName = cell.textLabel;
-    UIImageView *importantTask = cell.imageView;
+    UILabel *taskName = cell.taskName;
+    UIImageView *importantTask = cell.todoImageView;
+    
     //NSLog(@"%@",self.tasks[indexPath.row]);
     if ([self.model getSingleTask:indexPath.row] != nil) {
         
         taskName.text = [self.model getSingleTask:rowNumber];
         
-        if (!isCompleted) {
+        if (isCompleted) {
             taskName.textColor = [UIColor greenColor];
-            // Disable the completeButton
+            //Disable the completeButton
+            cell.completeButton.enabled = NO;
+            
         }
         
         if ([self.model getSinglePriority:rowNumber]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
-            importantTask.contentMode = UIViewContentModeScaleToFill;
+            importantTask.contentMode = UIViewContentModeScaleAspectFit;
         }
     }
     
@@ -143,9 +146,14 @@
         
         EditsTableViewController *editTask = [segue destinationViewController];
         
-        NSIndexPath *task = self.tableView.indexPathForSelectedRow;
-        
-        editTask.taskToLoad = task.row + 1;
+        if (self.tableView.indexPathForSelectedRow != nil) {
+            NSIndexPath *task = self.tableView.indexPathForSelectedRow;
+            
+            editTask.taskToLoad = task.row + 1;
+        } else {
+            [self.model loadTaskAmount];
+            editTask.taskToLoad = -1;
+        }
     }
 }
 

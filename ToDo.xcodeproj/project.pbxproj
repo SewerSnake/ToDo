@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18399C6F2021F874002E63E3 /* ToDoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18399C6E2021F874002E63E3 /* ToDoTableViewCell.m */; };
 		184DC8EF201B1DAF00621D78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC8EE201B1DAF00621D78 /* AppDelegate.m */; };
 		184DC8F5201B1DAF00621D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F3201B1DAF00621D78 /* Main.storyboard */; };
 		184DC8F7201B1DAF00621D78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184DC8F6201B1DAF00621D78 /* Assets.xcassets */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18399C6D2021F874002E63E3 /* ToDoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToDoTableViewCell.h; sourceTree = "<group>"; };
+		18399C6E2021F874002E63E3 /* ToDoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoTableViewCell.m; sourceTree = "<group>"; };
 		184DC8EA201B1DAF00621D78 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184DC8ED201B1DAF00621D78 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184DC8EE201B1DAF00621D78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 				184DC90D201B8D7E00621D78 /* MainMenuViewController.m */,
 				184DC90F201BD5C500621D78 /* ListTableViewController.h */,
 				184DC910201BD5C500621D78 /* ListTableViewController.m */,
+				18399C6D2021F874002E63E3 /* ToDoTableViewCell.h */,
+				18399C6E2021F874002E63E3 /* ToDoTableViewCell.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 			files = (
 				184DC8FD201B1DAF00621D78 /* main.m in Sources */,
 				184DC8EF201B1DAF00621D78 /* AppDelegate.m in Sources */,
+				18399C6F2021F874002E63E3 /* ToDoTableViewCell.m in Sources */,
 				184DC904201B214300621D78 /* Model.m in Sources */,
 				184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */,
 				184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */,
