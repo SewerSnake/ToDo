@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.task becomeFirstResponder];
+    
     self.model = [[Model alloc]init];
     
     if (self.taskToLoad != -1) {
