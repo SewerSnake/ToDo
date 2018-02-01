@@ -60,7 +60,7 @@
     NSInteger rowNumber = indexPath.row + 1;
     
     BOOL isCompleted = NO;
-    //NSLog(@"Cell row number: %@",@(indexPath.row).stringValue);
+    
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     if ([self.model getCompletionStatus:rowNumber]) {
@@ -71,14 +71,13 @@
     UILabel *taskName = cell.taskName;
     UIImageView *importantTask = cell.todoImageView;
     
-    //NSLog(@"%@",self.tasks[indexPath.row]);
     if ([self.model getSingleTask:indexPath.row] != nil) {
         
         taskName.text = [self.model getSingleTask:rowNumber];
         
         if (isCompleted) {
             taskName.textColor = [UIColor greenColor];
-            //Disable the completeButton
+            cell.editButton.enabled = NO;
             cell.completeButton.enabled = NO;
             
         }
@@ -127,6 +126,24 @@
 }
 */
 
+#pragma mark - IBActions
+
+// Sets the selected task as completed. Reloads
+// the TableView, to update the application.
+- (IBAction)completeTask:(id)sender {
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.theTableView];
+    
+    NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
+    
+    NSInteger rowNumber = indexPath.row + 1;
+    
+    if (indexPath != nil) {
+        [self.model setTaskAsCompleted:rowNumber];
+        
+        [self.theTableView reloadData];
+    }
+}
+
 #pragma mark - Navigation
 
 // Provides the row number of the clicked cell to
@@ -144,17 +161,15 @@
         editTask.taskToLoad = -1;
     } else if ([segue.identifier isEqualToString:@"editTaskSegue"]) {
         
-        //UITableViewCell *cell = sender;
-        
         EditsTableViewController *editTask = [segue destinationViewController];
         
         CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.theTableView];
+        
         NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
         
         if (indexPath != nil) {
-           
             editTask.taskToLoad = indexPath.row + 1;
-            NSLog(@"Loading task: %ld",(long)editTask.taskToLoad);
+            //NSLog(@"Loading task: %ld",(long)editTask.taskToLoad);
         } else {
             [self.model loadTaskAmount];
             editTask.taskToLoad = -1;

@@ -14,11 +14,11 @@
     [super awakeFromNib];
 }
 
+// An usused method.
 - (IBAction)editTask:(id)sender {}
 
-- (IBAction)completeTask:(id)sender {
-    NSLog(@"Completetask Button");
-}
+// An usused method.
+- (IBAction)completeTask:(id)sender {}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

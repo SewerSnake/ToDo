@@ -172,6 +172,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Done!"/>
                                             <connections>
+                                                <action selector="completeTask:" destination="4ZP-Ev-cn0" eventType="touchUpInside" id="tc7-Og-3Fx"/>
                                                 <action selector="completeTask:" destination="aXM-ll-Gfm" eventType="touchUpInside" id="ucI-YM-aYE"/>
                                             </connections>
                                         </button>

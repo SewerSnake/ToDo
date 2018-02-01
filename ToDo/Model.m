@@ -93,6 +93,16 @@
     }
 }
 
+- (void)setTaskAsCompleted:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    NSString *index = [@"completed" stringByAppendingString:@(rowNumber).stringValue];
+    
+    [preferences setBool:YES forKey:index];
+    
+    [preferences synchronize];
+}
+
 // Saves the task header, the task notes and
 // the crucial 'priority' variable to
 // NSUserDefaults. Used when a task
