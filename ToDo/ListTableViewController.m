@@ -66,7 +66,7 @@
 // represent that. If a completed task is loaded,
 // its buttons are disabled, and its text changed
 // to the color green.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     NSInteger rowNumber = indexPath.row + 1;
     
     BOOL isCompleted = NO;
@@ -74,7 +74,6 @@
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     if ([self.model getCompletionStatus:rowNumber]) {
-        //Reorder the table so that completed tasks appear at the beginning/end of the list.
         isCompleted = YES;
     }
     
@@ -89,7 +88,6 @@
             taskName.textColor = [UIColor greenColor];
             cell.editButton.enabled = NO;
             cell.completeButton.enabled = NO;
-            
         }
         
         if ([self.model getSinglePriority:rowNumber]) {
@@ -98,9 +96,18 @@
         }
     }
     
+    /*if (isCompleted) {
+        NSLog(@"Entered reordering");
+        //Reorder the table so that completed tasks appear at the beginning of the list.
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSIndexPath *rowZero = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:rowZero] withRowAnimation:UITableViewRowAnimationFade];
+    }*/
+    
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
