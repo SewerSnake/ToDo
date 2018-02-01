@@ -17,6 +17,8 @@
 
 @property (nonatomic) NSMutableArray *taskNotes;
 
+@property (strong, nonatomic) IBOutlet UITableView *theTableView;
+
 @property (nonatomic) Model *model;
 
 @end
@@ -30,7 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    [self.theTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -146,10 +148,13 @@
         
         EditsTableViewController *editTask = [segue destinationViewController];
         
-        if (self.tableView.indexPathForSelectedRow != nil) {
-            NSIndexPath *task = self.tableView.indexPathForSelectedRow;
-            
-            editTask.taskToLoad = task.row + 1;
+        CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.theTableView];
+        NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
+        
+        if (indexPath != nil) {
+           
+            editTask.taskToLoad = indexPath.row + 1;
+            NSLog(@"Loading task: %ld",(long)editTask.taskToLoad);
         } else {
             [self.model loadTaskAmount];
             editTask.taskToLoad = -1;

@@ -14,9 +14,17 @@
     [super awakeFromNib];
 }
 
+- (IBAction)editTask:(id)sender {}
+
+- (IBAction)completeTask:(id)sender {
+    NSLog(@"Completetask Button");
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
 }
+
+
 
 @end

@@ -10,6 +10,8 @@
 
 @interface ToDoTableViewCell : UITableViewCell
 
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *todoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *taskName;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;

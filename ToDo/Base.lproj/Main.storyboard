@@ -162,8 +162,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Edit"/>
                                             <connections>
-                                                <action selector="editTask:" destination="4ZP-Ev-cn0" eventType="touchUpInside" id="Aaq-s5-uCZ"/>
-                                                <segue destination="mqH-f1-Xge" kind="show" identifier="editTaskSegue" id="waE-GJ-xe8"/>
+                                                <action selector="editTask:" destination="aXM-ll-Gfm" eventType="touchUpInside" id="Hfg-0L-BWn"/>
+                                                <segue destination="mqH-f1-Xge" kind="show" identifier="editTaskSegue" id="ZC3-wW-GdX"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJb-kt-esK" userLabel="completeButton">
@@ -171,6 +171,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Done!"/>
+                                            <connections>
+                                                <action selector="completeTask:" destination="aXM-ll-Gfm" eventType="touchUpInside" id="ucI-YM-aYE"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODQ-Y4-TE7" userLabel="PriorityImage">
                                             <rect key="frame" x="216" y="58" width="143" height="86"/>
@@ -200,6 +203,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="oRX-Sd-zYd" id="6sr-7R-QoR"/>
+                        <outlet property="theTableView" destination="oRX-Sd-zYd" id="1bY-MP-9LJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odf-4Q-r5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,6 +233,6 @@
         <image name="todo list" width="926" height="1280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="waE-GJ-xe8"/>
+        <segue reference="ZC3-wW-GdX"/>
     </inferredMetricsTieBreakers>
 </document>
