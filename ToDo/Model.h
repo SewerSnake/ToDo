@@ -26,4 +26,6 @@
 
 - (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
 
+- (void)reorderData:(NSInteger)rowNumber;
+
 @end

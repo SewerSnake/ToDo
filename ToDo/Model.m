@@ -161,5 +161,58 @@
     [preferences synchronize];
 }
 
+// Swaps the data in the TableView, so that
+// completed tasks appear at the top of the
+// table. Does not work correctly...
+- (void)reorderData:(NSInteger)rowNumber {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    for (int i = 1; i <= [self getTaskAmount]; i++) {
+        
+        if (!([self getCompletionStatus:i])) {
+            
+            NSString *tempTask = [preferences objectForKey:[@"task" stringByAppendingString:@(i).stringValue]];
+            NSString *tempTaskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(i).stringValue]];
+            BOOL tempPriority = [preferences boolForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
+            
+            NSString *index1 = [@"task" stringByAppendingString:@(i).stringValue];
+            
+            [preferences setObject:[self getSingleTask:rowNumber] forKey:index1];
+            
+            NSString *index2 = [@"taskNote" stringByAppendingString:@(i).stringValue];
+            
+            [preferences setObject:[self getSingleTaskNote:rowNumber] forKey:index2];
+            
+            NSString *index3 = [@"priority" stringByAppendingString:@(i).stringValue];
+            
+            [preferences setBool:[self getSinglePriority:rowNumber] forKey:index3];
+            
+            NSString *index4 = [@"completed" stringByAppendingString:@(i).stringValue];
+            
+            [preferences setBool:YES forKey:index4];
+            
+            NSString *index5 = [@"task" stringByAppendingString:@(rowNumber).stringValue];
+            
+            [preferences setObject:tempTask forKey:index5];
+            
+            NSString *index6 = [@"taskNote" stringByAppendingString:@(rowNumber).stringValue];
+            
+            [preferences setObject:tempTaskNote forKey:index6];
+            
+            NSString *index7 = [@"priority" stringByAppendingString:@(rowNumber).stringValue];
+            
+            [preferences setBool:tempPriority forKey:index7];
+            
+            NSString *index8 = [@"completed" stringByAppendingString:@(rowNumber).stringValue];
+            
+            [preferences setBool:NO forKey:index8];
+            
+            [preferences synchronize];
+            
+            break;
+        }
+    }
+}
+
 @end
 
