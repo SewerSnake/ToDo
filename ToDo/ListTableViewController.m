@@ -30,6 +30,7 @@
     self.model = [[Model alloc] init];
 }
 
+// Reloads the TableView.
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.theTableView reloadData];
@@ -56,6 +57,15 @@
     }
 }
 
+// As the row count starts from zero,
+// the row number must be increased by
+// one. Fills the Label taskName via
+// the corresponding row in NSUserDefaults.
+// In the same fashion, if a task is important,
+// the image 'important.png' is shown to
+// represent that. If a completed task is loaded,
+// its buttons are disabled, and its text changed
+// to the color green.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger rowNumber = indexPath.row + 1;
     
@@ -169,7 +179,6 @@
         
         if (indexPath != nil) {
             editTask.taskToLoad = indexPath.row + 1;
-            //NSLog(@"Loading task: %ld",(long)editTask.taskToLoad);
         } else {
             [self.model loadTaskAmount];
             editTask.taskToLoad = -1;

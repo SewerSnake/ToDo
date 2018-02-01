@@ -20,26 +20,32 @@
 // by one for the upcoming entry.
 - (void) loadTaskAmount {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
     NSInteger taskAmount;
+    
     if ([preferences integerForKey:@"taskAmount"] == 0) {
         taskAmount = 1;
     } else {
         taskAmount = [preferences integerForKey:@"taskAmount"];
+        
         if (taskAmount == NSIntegerMax) {
             taskAmount = 1;
         } else {
             taskAmount++;
         }
     }
+    
     [preferences setInteger:taskAmount forKey:@"taskAmount"];
+    
     [preferences synchronize];
 }
 
 // Getter method for the task index.
 - (NSInteger)getTaskAmount {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    //NSLog(@"%@", @(taskAmount).stringValue);
+    
     return taskAmount;
 }
 
@@ -112,13 +118,13 @@
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
     NSInteger taskAmount = [preferences integerForKey:@"taskAmount"];
-    NSLog(@"Task %@",@(taskAmount).stringValue);
+
     NSString *index1 = [@"task" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(@"%@",index1);
+   
     NSString *index2 = [@"taskNote" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(@"%@",index2);
+   
     NSString *index3 = [@"priority" stringByAppendingString:@(taskAmount).stringValue];
-    //NSLog(@"%@",index3);
+   
     NSString *index4 = [@"completed" stringByAppendingString:@(taskAmount).stringValue];
     
     [preferences setObject:task forKey:index1];
@@ -130,7 +136,6 @@
     [preferences setBool:NO forKey:index4];
     
     [preferences synchronize];
-    
 }
 
 // Saves the task header, the task notes and

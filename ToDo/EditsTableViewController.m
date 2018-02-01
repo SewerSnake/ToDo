@@ -25,12 +25,21 @@
 
 @implementation EditsTableViewController
 
+// Ensures that the task name
+// is a first responder.
+// Instantiates the Model
+// class. If taskToLoad is
+// -1, a new task is to be
+// created. Otherwise,
+// the corresponding task name,
+// task notes and priority are
+// loaded for that cell row.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.task becomeFirstResponder];
     
-    self.model = [[Model alloc]init];
+    self.model = [[Model alloc] init];
     
     if (self.taskToLoad != -1) {
         [self loadTask];
@@ -92,7 +101,6 @@
 // Loads the task info via the row number
 // provided from ListTableViewController.
 - (void)loadTask {
-    NSLog(@"%@",@(self.taskToLoad).stringValue);
     self.task.text = [self.model getSingleTask:self.taskToLoad];
     self.taskNotes.text = [self.model getSingleTaskNote:self.taskToLoad];
     self.isImportant = [self.model getSinglePriority:self.taskToLoad];
