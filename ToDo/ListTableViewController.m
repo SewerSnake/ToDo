@@ -25,6 +25,8 @@
 
 @implementation ListTableViewController
 
+// Creates an object of the Model
+// class.
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.model = [[Model alloc] init];
@@ -43,12 +45,13 @@
 #pragma mark - Table view data source
 
 // There is a single section in the used TableView.
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     return 1;
 }
 
-// The number of rows is equal to the number of tasks.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+// The number of rows is equal to the number of tasks
+// currently in NSUserDefaults.
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     
     if ([self.model getTaskAmount] == 0) {
         return 0;
@@ -75,10 +78,6 @@
     
     if ([self.model getCompletionStatus:rowNumber]) {
         isCompleted = YES;
-
-        /*if (rowNumber != 1) {
-            [self.model reorderData:rowNumber];
-        }*/
     }
     
     UILabel *taskName = cell.taskName;
@@ -99,7 +98,16 @@
             importantTask.contentMode = UIViewContentModeScaleAspectFit;
         }
     }
-
+    
+    if (isCompleted && rowNumber != 1) {
+        NSIndexPath *indexPathOfLastItem =
+        [NSIndexPath indexPathForRow:([self.model getTaskAmount] - 1) inSection:0];
+        // Move table view row:
+        [tableView moveRowAtIndexPath:indexPath toIndexPath:indexPathOfLastItem];
+        // Call data source method:
+        [self tableView:tableView moveRowAtIndexPath:indexPath toIndexPath:indexPathOfLastItem];
+    }
+    
     return cell;
 }
 
