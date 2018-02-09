@@ -81,15 +81,17 @@
 }
 
 // Saves what the user wrote to NSUserDefaults
-// via the model class. Proceeds to the list
-// of tasks.
+// via the model class. In the case of editing,
+// taskToLoad must be increased by one,
+// to comply with NSuserDefaults. After saving,
+// the app proceeds to the list of tasks.
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
         if (self.taskToLoad == -1) {
             [self.model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant completed:NO];
         } else {
-            [self.model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+            [self.model saveInfo:self.taskToLoad + 1 saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
         }
         
         [self performSegueWithIdentifier:@"backToListSegue" sender:self];
