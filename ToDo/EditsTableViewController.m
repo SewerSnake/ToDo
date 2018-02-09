@@ -81,8 +81,8 @@
 }
 
 // Saves what the user wrote to NSUserDefaults
-// via the model class. Dismisses this view
-// and returns to the main menu.
+// via the model class. Proceeds to the list
+// of tasks.
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
@@ -101,9 +101,12 @@
 // Loads the task info via the row number
 // provided from ListTableViewController.
 - (void)loadTask {
-    self.task.text = [self.model getSingleTask:self.taskToLoad];
-    self.taskNotes.text = [self.model getSingleTaskNote:self.taskToLoad];
-    self.isImportant = [self.model getSinglePriority:self.taskToLoad];
+    NSArray *tasks = [self.model getIncompletedTasks];
+    self.task.text = tasks[self.taskToLoad];
+    NSArray *taskNotes = [self.model getIncompletedTaskNotes];
+    self.taskNotes.text = taskNotes[self.taskToLoad];
+    NSArray *priorities = [self.model getIncompletedPriorities];
+    self.isImportant = priorities[self.taskToLoad];
 }
 
 - (void)didReceiveMemoryWarning {

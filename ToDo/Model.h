@@ -12,11 +12,17 @@
 
 - (NSInteger)getTaskAmount;
 
-- (NSString*)getSingleTask:(NSInteger)rowNumber;
+- (NSInteger)getAmountOfIncompletedTasks;
 
-- (NSString*)getSingleTaskNote:(NSInteger)rowNumber;
+- (NSInteger)getAmountOfCompletedTasks;
 
-- (BOOL)getSinglePriority:(NSInteger)rowNumber;
+- (NSArray*)getCompletedTasks;
+
+- (NSArray*)getIncompletedTasks;
+
+- (NSArray*)getIncompletedTaskNotes;
+
+- (NSArray*)getIncompletedPriorities;
 
 - (BOOL)getCompletionStatus:(NSInteger)rowNumber;
 
@@ -25,7 +31,5 @@
 - (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant completed:(BOOL)isCompleted;
 
 - (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
-
-- (void)reorderData:(NSInteger)rowNumber;
 
 @end

@@ -11,6 +11,9 @@
 #import "Model.h"
 #import "ToDoTableViewCell.h"
 
+const int sectionIncompleted = 0;
+const int sectionCompleted = 1;
+
 @interface ListTableViewController ()
 
 @property (nonatomic) NSMutableArray *tasks;
@@ -44,70 +47,68 @@
 
 #pragma mark - Table view data source
 
-// There is a single section in the used TableView.
+// There are two sections; One for
+// incompleted tasks and one for completed
+// tasks.
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-    return 1;
+    return 2;
 }
 
-// The number of rows is equal to the number of tasks
-// currently in NSUserDefaults.
+// The number of rows is adjusted, depending
+// on which section it is.
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if ([self.model getTaskAmount] == 0) {
-        return 0;
+    if (section == 0) {
+        return [self.model getAmountOfIncompletedTasks];
     } else {
-        return [self.model getTaskAmount];
+        return [self.model getAmountOfCompletedTasks];
     }
 }
 
 // As the row count starts from zero,
 // the row number must be increased by
 // one. Fills the Label taskName via
-// the corresponding row in NSUserDefaults.
-// In the same fashion, if a task is important,
+// the corresponding row. If it an incompleted
+// task, it is added to the first section.
+// If it is a completed task, it is added to
+// the second section.
+// If a task is important,
 // the image 'important.png' is shown to
 // represent that. If a completed task is loaded,
 // its buttons are disabled, and its text changed
-// to the color green.
+// to the color green. The image is not shown.
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     NSInteger rowNumber = indexPath.row + 1;
     
-    BOOL isCompleted = NO;
-    
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
-    if ([self.model getCompletionStatus:rowNumber]) {
-        isCompleted = YES;
-    }
-    
     UILabel *taskName = cell.taskName;
+    
     UIImageView *importantTask = cell.todoImageView;
     
-    if ([self.model getSingleTask:indexPath.row] != nil) {
+    if ([self.model getCompletionStatus:rowNumber] && indexPath.section == 1) {
         
-        taskName.text = [self.model getSingleTask:rowNumber];
-        
-        if (isCompleted) {
-            taskName.textColor = [UIColor greenColor];
-            cell.editButton.enabled = NO;
-            cell.completeButton.enabled = NO;
+        if ([self.model getCompletedTasks] != nil) {
+            NSArray *tasks = [self.model getCompletedTasks];
+            taskName.text = tasks[indexPath.row];
         }
         
-        if ([self.model getSinglePriority:rowNumber]) {
+        taskName.textColor = [UIColor greenColor];
+        cell.editButton.enabled = NO;
+        cell.completeButton.enabled = NO;
+    } else {
+        
+        if ([self.model getIncompletedTasks] != nil) {
+            NSArray *tasks = [self.model getIncompletedTasks];
+            taskName.text = tasks[indexPath.row];
+        }
+        
+        NSArray *priorities = [self.model getIncompletedPriorities];
+        
+        if ([priorities[indexPath.row] isEqualToString:@"YES"]) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
             importantTask.contentMode = UIViewContentModeScaleAspectFit;
         }
     }
-    
-    /*if (isCompleted && rowNumber != 1) {
-        NSIndexPath *indexPathOfLastItem =
-        [NSIndexPath indexPathForRow:(0) inSection:0];
-        // Move table view row:
-        [tableView moveRowAtIndexPath:indexPath toIndexPath:indexPathOfLastItem];
-        // Call data source method:
-        [self tableView:tableView moveRowAtIndexPath:indexPath toIndexPath:indexPathOfLastItem];
-    }*/
-    
     return cell;
 }
 
@@ -153,7 +154,7 @@
         NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
         
         if (indexPath != nil) {
-            editTask.taskToLoad = indexPath.row + 1;
+            editTask.taskToLoad = indexPath.row;
         } else {
             [self.model loadTaskAmount];
             editTask.taskToLoad = -1;

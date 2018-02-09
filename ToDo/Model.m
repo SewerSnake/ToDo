@@ -49,41 +49,96 @@
     return taskAmount;
 }
 
-- (NSString*)getSingleTask:(NSInteger)rowNumber {
+// Returns how many tasks that aren't finished.
+// Used in consideration for the first section
+// of the TableView.
+- (NSInteger)getAmountOfIncompletedTasks {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    int count = 0;
     
-    NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(rowNumber).stringValue]];
-    
-    if (task != nil) {
-        return task;
-    } else {
-        return @"Cannot find";
+    for (int i = 1; i <= [self getTaskAmount]; i++) {
+        BOOL completionStatus = [preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]];
+        
+        if (!completionStatus) {
+            count++;
+        }
     }
+    
+    return count;
 }
 
-- (NSString*)getSingleTaskNote:(NSInteger)rowNumber {
+// Returns how many tasks have been completed.
+// Used in consideration for the second section
+// of the TableView.
+- (NSInteger)getAmountOfCompletedTasks {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    int count = 0;
     
-    NSString *taskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(rowNumber).stringValue]];
-    
-    if (taskNote != nil) {
-        return taskNote;
-    } else {
-        return @"Cannot find";
+    for (int i = 1; i <= [self getTaskAmount]; i++) {
+        BOOL completionStatus = [preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]];
+        
+        if (completionStatus) {
+            count++;
+        }
     }
+    
+    return count;
 }
 
-- (BOOL)getSinglePriority:(NSInteger)rowNumber {
+- (NSArray*)getCompletedTasks {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *tasks = [[NSMutableArray alloc] init];
     
-    if ([preferences objectForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]] != nil) {
-        
-        BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(rowNumber).stringValue]];
-        
-        return priority;
-    } else {
-        return NO;
+    for (int i = 1; i <= [self getAmountOfIncompletedTasks]; i++) {
+        if ([preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]]) {
+            NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(i).stringValue]];
+            [tasks addObject:task];
+        }
     }
+    return tasks;
+}
+
+- (NSArray*)getIncompletedTasks {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *tasks = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i <= [self getAmountOfIncompletedTasks]; i++) {
+        if (![preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]]) {
+            NSString *task = [preferences objectForKey:[@"task" stringByAppendingString:@(i).stringValue]];
+            [tasks addObject:task];
+        }
+    }
+    return tasks;
+}
+
+- (NSArray*)getIncompletedTaskNotes {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *taskNotes = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i <= [self getAmountOfIncompletedTasks]; i++) {
+        if (![preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]]) {
+            NSString *taskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(i).stringValue]];
+            [taskNotes addObject:taskNote];
+        }
+    }
+    return taskNotes;
+}
+
+- (NSArray*)getIncompletedPriorities {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *priorities = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i <= [self getAmountOfIncompletedTasks]; i++) {
+        if (![preferences boolForKey:[@"completed" stringByAppendingString:@(i).stringValue]]) {
+            BOOL priority = [preferences boolForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
+            if (priority) {
+                [priorities addObject:@"YES"];
+            } else {
+                [priorities addObject:@"NO"];
+            }
+        }
+    }
+    return priorities;
 }
 
 - (BOOL)getCompletionStatus:(NSInteger)rowNumber {
@@ -99,6 +154,9 @@
     }
 }
 
+// The task is completed by setting
+// the corrsponding BOOL in NSUserDefaults
+// to YES.
 - (void)setTaskAsCompleted:(NSInteger)rowNumber {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
@@ -159,59 +217,6 @@
     [preferences setBool:isImportant forKey:index3];
     
     [preferences synchronize];
-}
-
-// Swaps the data in the TableView, so that
-// completed tasks appear at the top of the
-// table. Does not work correctly...
-- (void)reorderData:(NSInteger)rowNumber {
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    
-    for (int i = 1; i <= [self getTaskAmount]; i++) {
-        
-        if (!([self getCompletionStatus:i])) {
-            
-            NSString *tempTask = [preferences objectForKey:[@"task" stringByAppendingString:@(i).stringValue]];
-            NSString *tempTaskNote = [preferences objectForKey:[@"taskNote" stringByAppendingString:@(i).stringValue]];
-            BOOL tempPriority = [preferences boolForKey:[@"priority" stringByAppendingString:@(i).stringValue]];
-            
-            NSString *index1 = [@"task" stringByAppendingString:@(i).stringValue];
-            
-            [preferences setObject:[self getSingleTask:rowNumber] forKey:index1];
-            
-            NSString *index2 = [@"taskNote" stringByAppendingString:@(i).stringValue];
-            
-            [preferences setObject:[self getSingleTaskNote:rowNumber] forKey:index2];
-            
-            NSString *index3 = [@"priority" stringByAppendingString:@(i).stringValue];
-            
-            [preferences setBool:[self getSinglePriority:rowNumber] forKey:index3];
-            
-            NSString *index4 = [@"completed" stringByAppendingString:@(i).stringValue];
-            
-            [preferences setBool:YES forKey:index4];
-            
-            NSString *index5 = [@"task" stringByAppendingString:@(rowNumber).stringValue];
-            
-            [preferences setObject:tempTask forKey:index5];
-            
-            NSString *index6 = [@"taskNote" stringByAppendingString:@(rowNumber).stringValue];
-            
-            [preferences setObject:tempTaskNote forKey:index6];
-            
-            NSString *index7 = [@"priority" stringByAppendingString:@(rowNumber).stringValue];
-            
-            [preferences setBool:tempPriority forKey:index7];
-            
-            NSString *index8 = [@"completed" stringByAppendingString:@(rowNumber).stringValue];
-            
-            [preferences setBool:NO forKey:index8];
-            
-            [preferences synchronize];
-            
-            break;
-        }
-    }
 }
 
 @end
