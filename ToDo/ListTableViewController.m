@@ -101,7 +101,7 @@
     
     /*if (isCompleted && rowNumber != 1) {
         NSIndexPath *indexPathOfLastItem =
-        [NSIndexPath indexPathForRow:([self.model getTaskAmount] - 1) inSection:0];
+        [NSIndexPath indexPathForRow:(0) inSection:0];
         // Move table view row:
         [tableView moveRowAtIndexPath:indexPath toIndexPath:indexPathOfLastItem];
         // Call data source method:

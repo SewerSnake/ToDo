@@ -114,6 +114,9 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4ZP-Ev-cn0" kind="show" identifier="backToListSegue" id="kdX-QP-q54"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -130,7 +133,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fV7-ce-U4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2808.8000000000002" y="33.733133433283363"/>
+            <point key="canvasLocation" x="2778" y="34"/>
         </scene>
         <!--To-do list-->
         <scene sceneID="99a-BV-JIW">
@@ -234,6 +237,7 @@
         <image name="todo list" width="926" height="1280"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kdX-QP-q54"/>
         <segue reference="ZC3-wW-GdX"/>
     </inferredMetricsTieBreakers>
 </document>

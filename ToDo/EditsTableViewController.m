@@ -92,7 +92,7 @@
             [self.model saveInfo:self.taskToLoad saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
         }
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"backToListSegue" sender:self];
     } else {
         self.task.text = @"You must enter text!";
     }
