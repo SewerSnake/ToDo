@@ -6,30 +6,16 @@
 //  Copyright © 2018 Eric Groseclos. All rights reserved.
 //
 
+#import "ToDoTask.h"
+
 @interface Model : NSObject
 
-- (void)loadTaskAmount;
+- (instancetype)init;
 
-- (NSInteger)getTaskAmount;
+- (void)addToDo:(ToDoTask*)todo;
 
-- (NSInteger)getAmountOfIncompletedTasks;
+- (NSArray*)getAllToDos;
 
-- (NSInteger)getAmountOfCompletedTasks;
 
-- (NSArray*)getCompletedTasks;
-
-- (NSArray*)getIncompletedTasks;
-
-- (NSArray*)getIncompletedTaskNotes;
-
-- (NSArray*)getIncompletedPriorities;
-
-- (BOOL)getCompletionStatus:(NSInteger)rowNumber;
-
-- (void)setTaskAsCompleted:(NSInteger)rowNumber;
-
-- (void)saveInfo:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant completed:(BOOL)isCompleted;
-
-- (void)saveInfo:(NSInteger)rowNumber saveTask:(NSString*)task saveNotes:(NSString*)taskNotes important:(BOOL)isImportant;
 
 @end

@@ -8,13 +8,14 @@
 
 #import "ToDoTask.h"
 
-NSString *task = @"task";
-NSString *taskNote = @"taskNote";
-NSString *priority = @"priority";
-NSString *completed = @"completed";
+NSString *keyTask = @"task";
+NSString *keyTaskNote = @"taskNote";
+NSString *keyPriority = @"priority";
+NSString *keyCompleted = @"completed";
 
 @implementation ToDoTask
 
+// Instantiates all four properties.
 - (instancetype) initTask:(NSString*)task info:(NSString*)taskNote important:(BOOL)isImportant completed:(BOOL)isCompleted {
     self = [super init];
     
@@ -28,19 +29,33 @@ NSString *completed = @"completed";
     return self;
 }
 
+// Deserializes from memory.
 - (instancetype)initWithCoder:(NSCoder*)aDecoder {
     
     self = [super init];
     
     if (self) {
-        self.task = [aDecoder decodeObjectForKey:task];
+        self.task = [aDecoder decodeObjectForKey:keyTask];
+        
+        self.taskNote = [aDecoder decodeObjectForKey:keyTaskNote];
+        
+        self.priority = [aDecoder decodeIntegerForKey:keyPriority];
+        
+        self.completed = [aDecoder decodeIntegerForKey:keyCompleted];
     }
     
     return self;
 }
 
+// Uses serialization to save to memory.
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
-    <#code#>
+    [aCoder encodeObject:self.task forKey:keyTask];
+    
+    [aCoder encodeObject:self.taskNote forKey:keyTaskNote];
+    
+    [aCoder encodeInteger:self.priority forKey:keyPriority];
+    
+    [aCoder encodeInteger:self.completed forKey:keyCompleted];
 }
 
 @end
