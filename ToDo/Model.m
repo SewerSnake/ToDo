@@ -26,7 +26,9 @@ NSString *todoSaveKey = @"todos";
     if (self) {
         NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
         
-        self.todos = [preferences objectForKey:todoSaveKey];
+        NSData *data = [preferences objectForKey:todoSaveKey];
+        
+        self.todos = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         if (!self.todos) {
             self.todos = [[NSMutableArray alloc] init];
@@ -36,16 +38,20 @@ NSString *todoSaveKey = @"todos";
     return self;
 }
 
-// Adds a ToDoTask to the list.
+// Adds a ToDoTask to the list of tasks.
 - (void)addToDo:(ToDoTask*)todo {
     [self.todos addObject:todo];
     [self saveTask];
 }
 
-// Saves the list to NSUserDefaults.
+// Saves the list of tasks via serialization.
 - (void)saveTask {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    [preferences setObject:self.todos forKey:todoSaveKey];
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.todos];
+    
+    [preferences setObject:data forKey:todoSaveKey];
+    
     [preferences synchronize];
 }
 
