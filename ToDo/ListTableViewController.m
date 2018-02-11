@@ -77,9 +77,10 @@ const int sectionCompleted = 1;
 // its buttons are disabled, and its text changed
 // to the color green. The image is not shown.
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    NSInteger rowNumber = indexPath.row + 1;
-    
+   
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    
+    ToDoTask *task = self.model.getAllToDos[indexPath.row];
     
     UILabel *taskName = cell.taskName;
     
@@ -124,6 +125,7 @@ const int sectionCompleted = 1;
     NSInteger rowNumber = indexPath.row + 1;
     
     if (indexPath != nil) {
+        //this rowNumber does not correspond with NSUserDefaults, as only incompleted tasks are shown in section one
         [self.model setTaskAsCompleted:rowNumber];
         
         [self.theTableView reloadData];
@@ -134,8 +136,6 @@ const int sectionCompleted = 1;
 
 // Provides the row number of the clicked cell to
 // EditsTableViewController, in case 'editTaskSegue'.
-// As the cell index starts from zero, the row number
-// must be increased by one.
 // taskToLoad is set to -1 in 'taskSegue':s case, as a task is
 // to be created for the first time.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

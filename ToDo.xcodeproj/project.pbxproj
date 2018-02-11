@@ -17,6 +17,7 @@
 		184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90A201B811500621D78 /* EditsTableViewController.m */; };
 		184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC90D201B8D7E00621D78 /* MainMenuViewController.m */; };
 		184DC911201BD5C500621D78 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC910201BD5C500621D78 /* ListTableViewController.m */; };
+		18DFE68A203086F400F7937B /* ToDoTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DFE689203086F400F7937B /* ToDoTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		184DC90D201B8D7E00621D78 /* MainMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		184DC90F201BD5C500621D78 /* ListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
 		184DC910201BD5C500621D78 /* ListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
+		18DFE688203086F400F7937B /* ToDoTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToDoTask.h; sourceTree = "<group>"; };
+		18DFE689203086F400F7937B /* ToDoTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				184DC910201BD5C500621D78 /* ListTableViewController.m */,
 				18399C6D2021F874002E63E3 /* ToDoTableViewCell.h */,
 				18399C6E2021F874002E63E3 /* ToDoTableViewCell.m */,
+				18DFE688203086F400F7937B /* ToDoTask.h */,
+				18DFE689203086F400F7937B /* ToDoTask.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				184DC904201B214300621D78 /* Model.m in Sources */,
 				184DC90B201B811500621D78 /* EditsTableViewController.m in Sources */,
 				184DC90E201B8D7E00621D78 /* MainMenuViewController.m in Sources */,
+				18DFE68A203086F400F7937B /* ToDoTask.m in Sources */,
 				184DC911201BD5C500621D78 /* ListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

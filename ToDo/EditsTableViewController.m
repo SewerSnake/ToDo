@@ -105,8 +105,10 @@
 - (void)loadTask {
     NSArray *tasks = [self.model getIncompletedTasks];
     self.task.text = tasks[self.taskToLoad];
+    
     NSArray *taskNotes = [self.model getIncompletedTaskNotes];
     self.taskNotes.text = taskNotes[self.taskToLoad];
+    
     NSArray *priorities = [self.model getIncompletedPriorities];
     self.isImportant = priorities[self.taskToLoad];
 }
