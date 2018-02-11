@@ -20,6 +20,8 @@ static const int sectionCompleted = 1;
 
 - (NSArray*)getAllTasks;
 
-- (NSArray*)getTasksForSection:(int)section;
+- (NSMutableArray*)getTasksForSection:(int)section;
+
+- (void)setTaskAsCompleted:(NSInteger)row;
 
 @end

@@ -88,6 +88,7 @@
     }
     
     if (task != nil && !task.completed && indexPath.section == 0) {
+        
         taskName.text = task.task;
         
         if (task.priority) {
@@ -119,11 +120,8 @@
     
     NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
     
-    NSInteger rowNumber = indexPath.row + 1;
-    
     if (indexPath != nil) {
-        //this rowNumber does not correspond with NSUserDefaults, as only incompleted tasks are shown in section one
-        [self.model setTaskAsCompleted:rowNumber];
+        [self.model setTaskAsCompleted:indexPath.row];
         
         [self.theTableView reloadData];
     }
@@ -137,7 +135,6 @@
 // to be created for the first time.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"taskSegue"]) {
-        [self.model loadTaskAmount];
         
         EditsTableViewController *editTask = [segue destinationViewController];
         
@@ -153,7 +150,6 @@
         if (indexPath != nil) {
             editTask.taskToLoad = indexPath.row;
         } else {
-            [self.model loadTaskAmount];
             editTask.taskToLoad = -1;
         }
     }

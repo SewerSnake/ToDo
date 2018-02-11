@@ -64,7 +64,7 @@ NSString *taskSaveKey = @"tasks";
 }
 
 // Retrieves all tasks for a specific section.
-- (NSArray*)getTasksForSection:(int)section {
+- (NSMutableArray*)getTasksForSection:(int)section {
     NSMutableArray *todosForSection = [[NSMutableArray alloc] init];
     
     for (ToDoTask *task in self.tasks) {
@@ -74,6 +74,25 @@ NSString *taskSaveKey = @"tasks";
     }
     
     return todosForSection;
+}
+
+// Searches among the incompleted tasks until
+// the desired task is found.
+// The task is now considered finished.
+- (void)setTaskAsCompleted:(NSInteger)row {
+    NSMutableArray *incompletedTasks = [self getTasksForSection:sectionIncompleted];
+    
+    for (int i = 0; i < incompletedTasks.count; i++) {
+        
+        if (i == row) {
+            ToDoTask *task = incompletedTasks[i];
+            
+            if (task != nil) {
+                task.completed = YES;
+            }
+            break;
+        }
+    }
 }
 
 @end
