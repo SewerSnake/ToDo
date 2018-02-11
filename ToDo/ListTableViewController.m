@@ -11,9 +11,6 @@
 #import "Model.h"
 #import "ToDoTableViewCell.h"
 
-const int sectionIncompleted = 0;
-const int sectionCompleted = 1;
-
 @interface ListTableViewController ()
 
 @property (nonatomic) NSMutableArray *tasks;
@@ -57,11 +54,9 @@ const int sectionCompleted = 1;
 // The number of rows is adjusted, depending
 // on which section it is.
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return [self.model getAmountOfIncompletedTasks];
-    } else {
-        return [self.model getAmountOfCompletedTasks];
-    }
+    NSArray *todosForSection = [self.model getToDosForSection:(int)section];
+    
+    return todosForSection.count;
 }
 
 // As the row count starts from zero,

@@ -8,6 +8,10 @@
 
 #import "ToDoTask.h"
 
+static const int sectionIncompleted = 0;
+
+static const int sectionCompleted = 1;
+
 @interface Model : NSObject
 
 - (instancetype)init;
@@ -16,6 +20,6 @@
 
 - (NSArray*)getAllToDos;
 
-
+- (NSArray*)getToDosForSection:(int)section;
 
 @end

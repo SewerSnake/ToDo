@@ -12,7 +12,9 @@
 NSString *todoSaveKey = @"todos";
 
 @interface Model ()
+
 @property (nonatomic) NSMutableArray *todos;
+
 @end
 
 @implementation Model
@@ -59,6 +61,19 @@ NSString *todoSaveKey = @"todos";
 // list in a NSArray.
 - (NSArray*)getAllToDos {
     return self.todos;
+}
+
+// Retrieves all tasks for a specific section.
+- (NSArray*)getToDosForSection:(int)section {
+    NSMutableArray *todosForSection = [[NSMutableArray alloc] init];
+    
+    for (ToDoTask *task in self.todos) {
+        if ((section == sectionIncompleted && !task.completed) || (section == sectionCompleted && task.completed)) {
+            [todosForSection addObject:task];
+        }
+    }
+    
+    return todosForSection;
 }
 
 @end
