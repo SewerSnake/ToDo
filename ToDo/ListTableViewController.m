@@ -54,14 +54,12 @@
 // The number of rows is adjusted, depending
 // on which section it is.
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *todosForSection = [self.model getToDosForSection:(int)section];
+    NSArray *todosForSection = [self.model getTasksForSection:(int)section];
     
     return todosForSection.count;
 }
 
-// As the row count starts from zero,
-// the row number must be increased by
-// one. Fills the Label taskName via
+// Fills the Label taskName via
 // the corresponding row. If it an incompleted
 // task, it is added to the first section.
 // If it is a completed task, it is added to
@@ -75,36 +73,40 @@
    
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
-    ToDoTask *task = self.model.getAllToDos[indexPath.row];
-    
     UILabel *taskName = cell.taskName;
     
     UIImageView *importantTask = cell.todoImageView;
     
-    if ([self.model getCompletionStatus:rowNumber] && indexPath.section == 1) {
+    NSArray *filteredTasks = nil;
+    
+    ToDoTask *task = nil;
+    
+    if ([self.model getTasksForSection:(int)indexPath.section] != nil) {
+        filteredTasks = [self.model getTasksForSection:(int)indexPath.section];
         
-        if ([self.model getCompletedTasks] != nil) {
-            NSArray *tasks = [self.model getCompletedTasks];
-            taskName.text = tasks[indexPath.row];
-        }
+        task = filteredTasks[indexPath.row];
+    }
+    
+    if (task != nil && !task.completed && indexPath.section == 0) {
+        taskName.text = task.task;
         
-        taskName.textColor = [UIColor greenColor];
-        cell.editButton.enabled = NO;
-        cell.completeButton.enabled = NO;
-    } else {
-        
-        if ([self.model getIncompletedTasks] != nil) {
-            NSArray *tasks = [self.model getIncompletedTasks];
-            taskName.text = tasks[indexPath.row];
-        }
-        
-        NSArray *priorities = [self.model getIncompletedPriorities];
-        
-        if ([priorities[indexPath.row] isEqualToString:@"YES"]) {
+        if (task.priority) {
             importantTask.image = [UIImage imageNamed:@"important.png"];
             importantTask.contentMode = UIViewContentModeScaleAspectFit;
         }
     }
+    
+    if (task != nil && task.completed && indexPath.section == 1) {
+       
+        taskName.text = task.task;
+        
+        taskName.textColor = [UIColor greenColor];
+        
+        cell.editButton.enabled = NO;
+        
+        cell.completeButton.enabled = NO;
+    }
+    
     return cell;
 }
 

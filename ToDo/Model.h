@@ -16,10 +16,10 @@ static const int sectionCompleted = 1;
 
 - (instancetype)init;
 
-- (void)addToDo:(ToDoTask*)todo;
+- (void)addTask:(ToDoTask*)task;
 
-- (NSArray*)getAllToDos;
+- (NSArray*)getAllTasks;
 
-- (NSArray*)getToDosForSection:(int)section;
+- (NSArray*)getTasksForSection:(int)section;
 
 @end

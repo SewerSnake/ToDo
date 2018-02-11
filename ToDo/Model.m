@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "Model.h"
 
-NSString *todoSaveKey = @"todos";
+NSString *taskSaveKey = @"tasks";
 
 @interface Model ()
 
-@property (nonatomic) NSMutableArray *todos;
+@property (nonatomic) NSMutableArray *tasks;
 
 @end
 
 @implementation Model
 
 // Loads the NSMutableArray
-// that is be used, 'todos'
+// that is be used, 'tasks'
 // with data from NSUserDefaults.
 - (instancetype)init {
     self = [super init];
@@ -28,21 +28,21 @@ NSString *todoSaveKey = @"todos";
     if (self) {
         NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
         
-        NSData *data = [preferences objectForKey:todoSaveKey];
+        NSData *data = [preferences objectForKey:taskSaveKey];
         
-        self.todos = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        self.tasks = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        if (!self.todos) {
-            self.todos = [[NSMutableArray alloc] init];
+        if (!self.tasks) {
+            self.tasks = [[NSMutableArray alloc] init];
         }
     }
     
     return self;
 }
 
-// Adds a ToDoTask to the list of tasks.
-- (void)addToDo:(ToDoTask*)todo {
-    [self.todos addObject:todo];
+// Adds a task to the list of tasks.
+- (void)addTask:(ToDoTask*)task {
+    [self.tasks addObject:task];
     [self saveTask];
 }
 
@@ -50,24 +50,24 @@ NSString *todoSaveKey = @"todos";
 - (void)saveTask {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.todos];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.tasks];
     
-    [preferences setObject:data forKey:todoSaveKey];
+    [preferences setObject:data forKey:taskSaveKey];
     
     [preferences synchronize];
 }
 
 // Gets every single task from the
 // list in a NSArray.
-- (NSArray*)getAllToDos {
-    return self.todos;
+- (NSArray*)getAllTasks {
+    return self.tasks;
 }
 
 // Retrieves all tasks for a specific section.
-- (NSArray*)getToDosForSection:(int)section {
+- (NSArray*)getTasksForSection:(int)section {
     NSMutableArray *todosForSection = [[NSMutableArray alloc] init];
     
-    for (ToDoTask *task in self.todos) {
+    for (ToDoTask *task in self.tasks) {
         if ((section == sectionIncompleted && !task.completed) || (section == sectionCompleted && task.completed)) {
             [todosForSection addObject:task];
         }
