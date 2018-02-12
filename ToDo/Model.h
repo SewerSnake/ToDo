@@ -22,6 +22,8 @@ static const int sectionCompleted = 1;
 
 - (NSMutableArray*)getTasksForSection:(int)section;
 
-- (void)setTaskAsCompleted:(NSInteger)row;
+- (void)setTaskAsCompleted:(NSString*)titleOfTask;
+
+- (void)saveEditedTask:(NSString*)titleOfTask info:(NSString*)taskNote important:(BOOL)isImportant;
 
 @end

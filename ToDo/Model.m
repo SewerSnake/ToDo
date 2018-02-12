@@ -76,20 +76,33 @@ NSString *taskSaveKey = @"tasks";
     return todosForSection;
 }
 
-// Searches among the incompleted tasks until
-// the desired task is found.
-// The task is now considered finished.
-- (void)setTaskAsCompleted:(NSInteger)row {
-    NSMutableArray *incompletedTasks = [self getTasksForSection:sectionIncompleted];
+// Searches among the tasks until
+// the desired task is found. Saves to memory.
+// The task is now considered to be finished.
+- (void)setTaskAsCompleted:(NSString*)titleOfTask {
     
-    for (int i = 0; i < incompletedTasks.count; i++) {
+    for (int i = 0; i < self.tasks.count; i++) {
+        ToDoTask *task = self.tasks[i];
         
-        if (i == row) {
-            ToDoTask *task = incompletedTasks[i];
-            
-            if (task != nil) {
-                task.completed = YES;
-            }
+        if (task != nil && [task.task isEqualToString:titleOfTask]) {
+            task.completed = YES;
+            [self saveTask];
+            break;
+        }
+    }
+}
+
+// Updates the list entry which shares the
+// same task title as the edited task.
+- (void)saveEditedTask:(NSString*)titleOfTask info:(NSString*)taskNote important:(BOOL)isImportant {
+    
+    for (int i = 0; i < self.tasks.count; i++) {
+        ToDoTask *task = self.tasks[i];
+        
+        if (task != nil && [task.task isEqualToString:titleOfTask]) {
+            task.taskNote = taskNote;
+            task.priority = isImportant;
+            [self saveTask];
             break;
         }
     }

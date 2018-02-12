@@ -8,6 +8,7 @@
 
 #import "EditsTableViewController.h"
 #import "Model.h"
+#import "ToDoTask.h"
 
 @interface EditsTableViewController ()
 
@@ -25,15 +26,16 @@
 
 @implementation EditsTableViewController
 
-// Ensures that the task name
-// is a first responder.
+// Ensures that the user can
+// write the title of the task immediately.
 // Instantiates the Model
 // class. If taskToLoad is
 // -1, a new task is to be
 // created. Otherwise,
-// the corresponding task name,
+// the corresponding
 // task notes and priority are
-// loaded for that cell row.
+// loaded for that incompleted task.
+// The interactable button is also created.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -42,6 +44,7 @@
     self.model = [[Model alloc] init];
     
     if (self.taskToLoad != -1) {
+         [self.task setUserInteractionEnabled:NO];
         [self loadTask];
     } else {
         self.isImportant = NO;
@@ -69,7 +72,7 @@
 }
 
 // Shows if the task is important or not.
-// Represented by two images.
+// Represented by two images of a star.
 - (void)flagMethod {
     if (self.isImportant) {
         [self.flagButton setBackgroundImage: [UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
@@ -81,17 +84,19 @@
 }
 
 // Saves what the user wrote to NSUserDefaults
-// via the model class. In the case of editing,
-// taskToLoad must be increased by one,
-// to comply with NSuserDefaults. After saving,
-// the app proceeds to the list of tasks.
+// via the model class. Either an entirely new
+// task is saved to the list, or a current entry
+// is edited.
+// After saving, the app proceeds to the list of tasks.
 - (IBAction)save:(id)sender {
     if (![self.task.text isEqualToString:@""] && ![self.taskNotes.text isEqualToString:@""]) {
         
         if (self.taskToLoad == -1) {
-            [self.model saveInfo:self.task.text saveNotes:self.taskNotes.text important:self.isImportant completed:NO];
+            ToDoTask *newTask = [[ToDoTask alloc]initTask:self.task.text info:self.taskNotes.text important:self.isImportant completed:NO];
+            
+            [self.model addTask:newTask];
         } else {
-            [self.model saveInfo:self.taskToLoad + 1 saveTask:self.task.text saveNotes:self.taskNotes.text important:self.isImportant];
+            [self.model saveEditedTask:self.task.text info:self.taskNotes.text important:self.isImportant];
         }
         
         [self performSegueWithIdentifier:@"backToListSegue" sender:self];
@@ -103,14 +108,13 @@
 // Loads the task info via the row number
 // provided from ListTableViewController.
 - (void)loadTask {
-    NSArray *tasks = [self.model getIncompletedTasks];
-    self.task.text = tasks[self.taskToLoad];
+    NSArray *incompletedTasks = [self.model getTasksForSection:sectionIncompleted];
     
-    NSArray *taskNotes = [self.model getIncompletedTaskNotes];
-    self.taskNotes.text = taskNotes[self.taskToLoad];
+    ToDoTask *task = incompletedTasks[self.taskToLoad];
     
-    NSArray *priorities = [self.model getIncompletedPriorities];
-    self.isImportant = priorities[self.taskToLoad];
+    self.task.text = task.task;
+    self.taskNotes.text = task.taskNote;
+    self.isImportant = task.priority;
 }
 
 - (void)didReceiveMemoryWarning {

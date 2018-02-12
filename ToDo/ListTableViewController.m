@@ -113,15 +113,20 @@
 
 #pragma mark - IBActions
 
-// Sets the selected task as completed. Reloads
-// the TableView, to update the application.
+// Sets the selected task as completed, by providing
+// the model class with the title of the task in
+// question. Reloads the TableView, to update the application.
 - (IBAction)completeTask:(id)sender {
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.theTableView];
     
     NSIndexPath *indexPath = [self.theTableView indexPathForRowAtPoint:buttonPosition];
     
     if (indexPath != nil) {
-        [self.model setTaskAsCompleted:indexPath.row];
+        NSArray *filteredTasks = [self.model getTasksForSection:sectionIncompleted];
+        
+        ToDoTask *task = filteredTasks[indexPath.row];
+        
+        [self.model setTaskAsCompleted:task.task];
         
         [self.theTableView reloadData];
     }
